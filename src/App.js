@@ -1,24 +1,16 @@
 import React, { Component } from 'react';
-import './App.css';
 import { connect } from 'react-redux';
+import Entity from './Entity';
+
+import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div>
-        {
-          this.props.entities.map(({id, position, angle, bounds, label}, index) =>
-            <div
-              key={ index }
-              className={ label }
-              style={{
-                left: `${bounds.min.x}px`,
-                top: `${bounds.min.y}px`,
-                width: `${bounds.max.x - bounds.min.x}px`,
-                height: `${bounds.max.y - bounds.min.y}px`,
-                transform: `rotate(${angle}rad)`
-              }}
-            ></div>
+        { 
+          this.props.entities.map((body, index) =>
+            <Entity key={index} body={ body } />
           )
         }
       </div>

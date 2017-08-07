@@ -1,6 +1,7 @@
 const FPS = 30;
 const Matter = require('matter-js');
 const pastThreshold = require('../utils').pastThreshold;
+const distance = require('../utils').distance;
 
 const Engine = Matter.Engine;
 const World = Matter.World;
@@ -18,20 +19,21 @@ const boxB = Bodies.rectangle(480, 200, 80, 80, {frictionAir: 0.05});
 const ground = Bodies.rectangle(400, 610, 400, 60, { isStatic: true });
 
 engine.world.gravity = {x: 0, y: 0, scale: 0.001};
-World.add(engine.world, [
-  boxA,
-  boxB,
-  ground,
-  Bodies.rectangle(480, 200, 80, 80, {frictionAir: 0.05}),
-  Bodies.rectangle(480, 200, 80, 80, {frictionAir: 0.05}),
-  Bodies.rectangle(480, 200, 80, 80, {frictionAir: 0.05})
-]);
+World.add(engine.world, [boxA, boxB, ground]);
 
-Body.setVelocity(boxA, {x:20, y:10});
-// Body.setAngle(boxA, 1);
-// console.log(boxA);
+console.log(boxA);
 
-const objectifyBody = ({id, position, angle, bounds, label}) => ({id, position, angle, bounds, label});
+const objectifyBody = ({id, position, angle, bounds, label, vertices, circleRadius}) => {
+  let width = distance(vertices[0], vertices[1]);
+  let height = distance(vertices[1], vertices[2]);
+
+  if(circleRadius){
+    width = circleRadius * 2;
+    height = circleRadius * 2;
+  }
+  
+  return {id, position, angle, bounds, label, width, height}
+};
 
 const updatePlayers = () => {
   Object.keys(players)
