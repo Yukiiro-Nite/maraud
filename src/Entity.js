@@ -12,7 +12,7 @@ const Entity = (props) => {
         height: `${height}px`,
         transform: `rotate(${angle}rad)`
       }}
-    ></div>
+    ><span className="cannon" /></div>
   );
 };
 

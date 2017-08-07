@@ -1,9 +1,19 @@
 .Body {
-  display: inline-block;
+  display: flex;
   position: absolute;
   background-color: gray;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .Circle {
   border-radius: 100%;
+}
+
+.cannon {
+  position: relative;
+  display: inline-block;
+  background-color: black;
+  height: 10%;
+  width: 25%;
 }

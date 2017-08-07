@@ -10,10 +10,13 @@ exports.config = {
       socket.emit('entities', engine.getEntities());
     },
     keys(io, socket, msg) {
-      processKeys({id: socket.id, keys: msg, engine});
+      processKeys({io, id: socket.id, keys: msg, engine});
     },
     move(io, socket, msg) {
       engine.setVelocity(socket.id, msg.direction);
+    },
+    fire(io, socket, msg) {
+      engine.fire(socket.id, msg.direction);
     },
     disconnect(io, socket, msg) {
       // TODO remove user's body, let other users know they have left.

@@ -18,6 +18,7 @@ const getMovementKeys = ({KeyW, KeyA, KeyS, KeyD}) => ({up:KeyW, left:KeyA, down
 
 const processKeys = ({id, keys, engine}) => {
   processMovement({id, keys: getMovementKeys(keys), engine});
+  keys.Space && engine.fire(id);
 };
 
 exports.processKeys = processKeys;
